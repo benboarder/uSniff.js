@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+/*_
+		@ uSniff.css
+		@ for uSniff.js
+		@ https://github.com/benboarder/uSniff.js
+
+		@ version 1.0
+		@ author Ben Boarder
+		@ copyright 'Halffull Studio' ©2013 - 2014
+
+		@ license MIT License (see LICENSE.txt)
+_*/
+h2{font-size: 20px}
+#alertDiv{
+	padding: 20px 60px 60px 60px;
+	margin-bottom: 18px;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+	border: 1px solid #fbeed5;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
