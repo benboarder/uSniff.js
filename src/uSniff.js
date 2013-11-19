@@ -10,50 +10,62 @@ var uSniffAPI;
 	uSniffAPI = uagent;
 }(self));
 
-// key words to look up
-// android | apple | windows | mac | tablet | phone | console
+	function searchUsrAgent(pUsrAgentString,pKeyword){
+		var usrAgentString = pUsrAgentString;
+		var keyword = pKeyword;
+		var mobileIMPORT;
+		// var safariTestArray =
 
-function searchUsrAgent(pUsrAgentString,pKeyword){
-	var usrAgentString = pUsrAgentString;
-	var keyword = pKeyword;
-	var mobileTestArray = ["iphone","ipad","ipad2","ipod","iemobile","blackberry","blackberry95","blackberry97","blackberry 99","blackberry96","blackberry89","blackberry 938","blackberry 98","bb10","playbook","silk-accelerated","palm","webos","hpwos","windows phone os 7","windows phone 8","windows ce"];
-	var safariTestArray = ["macintosh","webkit"];
-	var androidTestArray = ["android"];
-	var gameTestArray = ["playstation","wii","nintendo","xbox","nitro"];
+		switch(keyword){
+			case "mobile":
+				for(var i=0; i<mobileTestArray.length-1; i++){
+					if(usrAgentString.search(mobileTestArray[i]) > -1){
+						isFound = true;
 
-	switch(keyword){
-		case "mobile":
+						break;
+					}else{
+						isFound = false;
+					}
+				}
+			break;
+			case "safari":
+				for(var i=0; i<safariTestArray.length-1; i++){
+					if(usrAgentString.search(safariTestArray[i]) > -1){
+						isFound = true;
 
-		break;
-		case "safari":
+						break;
+					}else{
+						isFound = false;
+					}
+				}
+			break;
+			default:
 
-		break;
-		default:
+			return false;
+		}
 
-		return false;
+		return isFound;
 	}
 
-	for(var i=0; i<keyword.length-1; i++){
-		if(usrAgentString.search(mobileTestArray[i]) > -1){
-			isFound = true;
+	var uaM = searchUsrAgent(uSniffAPI,"mobile");
+	var uaS = searchUsrAgent(uSniffAPI,"safari");
+	var uaW = searchUsrAgent(uSniffAPI,"windows");
 
-			break;
-		}else{
-			isFound = false;
+	var thing={localStorage:true,print:true,pdf:true,xml:true,rtf:true,doc:true,txt:true};
+
+	removeFeatures(thing);
+
+	function removeFeatures(pAgent){
+		if(!pAgent.print){
+			document.getElementById("print").style.visibility="hidden";
+		}
+		if(!pAgent.pdf){
+			document.getElementById("pdf").style.visibility="hidden";
+		}
+		if(!pAgent.xml){
+			document.getElementById("xml").style.visibility="hidden";
+		}
+		if(!pAgent.doc){
+			document.getElementById("doc").style.visibility="hidden";
 		}
 	}
-
-	return isFound;
-}
-
-var uaM = searchUsrAgent(uSniffAPI,"mobile");
-var uaS = searchUsrAgent(uSniffAPI,"safari");
-var uaA = searchUsrAgent(uSniffAPI,"android");
-var uaG = searchUsrAgent(uSniffAPI,"games");
-
-console.log(uaM);
-console.log(uaS);
-console.log(uaA);
-console.log(uaG);
-
-document.getElementById("alertText").innerHTML = "<span><strong>raw signature:</strong> " + uSniffAPI + "</span><br><span><strong>mobile device =</strong> " + uaM + "</span><br><span><strong>safari device =</strong> " + uaS + "</span><br><span><strong>android =</strong> " + uaA + "</span><br><span><strong>game consoles =</strong> " + uaG;

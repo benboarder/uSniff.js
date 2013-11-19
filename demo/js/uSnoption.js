@@ -1,0 +1,9 @@
+mobileOPTIONS{
+	localStorage:true,
+	print:true,
+	pdf:true,
+	xml:true,
+	rtf:true,
+	doc:true,
+	txt:true
+}
